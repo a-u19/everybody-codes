@@ -13,7 +13,7 @@ def main_part_2(inp_2:str) -> int:
     #     if inp_2[i] in values.keys() and inp_2[i+1] in values.keys():
     #         res += 2
     # return re
-    return len(inp_2) - inp_2.count('\n') + main_part_1(inp_2) + inp_2.count('D') * 5 - inp_2.count('x') * 2 + re.sub(r'(..)', r'\1\n',inp_2).count('xx') * 2
+    return len(inp_2) + main_part_1(inp_2) + inp_2.count('D') * 5 - inp_2.count('x') * 2 + re.sub(r'(..)', r'\1\n',inp_2).count('xx') * 2
 
 inp_1 = open('everybody_codes_e2024_q01_p1.txt').read()
 inp_2 = open('everybody_codes_e2024_q01_p2.txt').read()
