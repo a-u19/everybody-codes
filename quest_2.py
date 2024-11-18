@@ -1,7 +1,8 @@
 import re
+from functools import reduce
 
 
-def main_1(inp_str_1:str, words:list[str]) -> int:
+def main_1(inp_str_1: str, words: list[str]) -> int:
     res = 0
     inp_str_1 = "".join(inp_str_1.split(" "))
     for word in words:
@@ -9,7 +10,7 @@ def main_1(inp_str_1:str, words:list[str]) -> int:
     return res
 
 
-def main_2(inp_str_2:list[str], words:list[str]):
+def main_2(inp_str_2: list[str], words: list[str]):
     used_indices = set()
     inp_str_2 = " ".join(temp_str.strip() for temp_str in inp_str_2)
     rev_inp_str_2 = inp_str_2[::-1]
@@ -17,11 +18,10 @@ def main_2(inp_str_2:list[str], words:list[str]):
     used_indices = count_symbols(words, inp_str_2, used_indices, False)
     used_indices = count_symbols(words, rev_inp_str_2, used_indices, True)
 
-
     return len(used_indices)
 
 
-def count_symbols(words:list[str], str:str, used_indices:set, rev:bool) -> set:
+def count_symbols(words: list[str], str: str, used_indices: set, rev: bool) -> set:
     for word in words:
         for i in re.finditer(word, str):
             for x in range(i.start(), i.end()):
@@ -32,86 +32,65 @@ def count_symbols(words:list[str], str:str, used_indices:set, rev:bool) -> set:
     return used_indices
 
 
-def main_3(inp_str_3:list[str], words:list[str]) -> int:
+def main_3(inp_str_3: list[str], words: list[str]) -> int:
     used_indices = set()
 
+    # Add reversed words for bidirectional matching
+    words = words + [word[::-1] for word in words]
     grid = convert_to_grid(inp_str_3)
-    # print(f"Print grid is:\n" + "\n".join(" ".join(row) for row in grid))
-    # print(f"Print grid is:\n" + "\n".join(" ".join(row) for row in reversed(grid)))
-    for rev in True, False:
-        used_indices = check_vertical(grid, words, used_indices, rev)
-        used_indices = check_horizontal(grid, words, used_indices, rev)
 
+    print("Words to search:", words)
+    print("Grid:")
+    print("\n".join(" ".join(row) for row in grid))
+
+    # Check vertically and horizontally
+    used_indices = check_vertical(grid, words, used_indices)
+    used_indices = check_horizontal(grid, words, used_indices)
+
+    print("Matched indices:", sorted(used_indices))
     return len(used_indices)
 
 
-def convert_to_grid(temp_str:list[str]) -> list:
-    for i, line in enumerate(temp_str):
-        temp_str[i] = list(line.strip())
-
-    return temp_str
+def convert_to_grid(temp_str: list[str]) -> list[list[str]]:
+    return [list(line.strip()) for line in temp_str]
 
 
-def check_vertical(grid:list[str], words:list[str], used_indices:set, rev:bool):
-    if not rev:
-        for col in range(len(grid[0])):
-            each_col = []
-            for row in range(len(grid)):
-                each_col.append(grid[row][col])
-            each_col = ''.join(each_col)
+def check_vertical(grid: list[list[str]], words: list[str], used_indices: set) -> set:
+    for col in range(len(grid[0])):
+        # Create a string for the current column
+        column_str = ''.join(row[col] for row in grid)
 
-            # print(each_col)
-
-            for word in words:
-                for i in re.finditer(word, each_col):
-                    for x in range(i.start(), i.end()):
-                        if tuple((x,col)) not in used_indices:
-                            used_indices.add(tuple((x, col)))
-
-    else:
-        for col in range(len(grid[0]) - 1, -1, -1):
-            each_col = []
-            for row in range(len(grid) - 1, -1, -1):
-                each_col.append(grid[row][col])
-            each_col = ''.join(each_col)
-
-            # print(each_col)
-
-            for word in words:
-                for i in re.finditer(word, each_col):
-                    for x in range(i.start(), i.end()):
-                        if tuple((x, col)) not in used_indices:
-                            used_indices.add(tuple((x, col)))
+        for word in words:
+            # Search for the word manually
+            start = 0
+            while True:
+                start = column_str.find(word, start)
+                if start == -1:  # No more matches
+                    break
+                # Add all indices corresponding to the found word
+                for x in range(len(word)):
+                    used_indices.add((start + x, col))
+                start += 1  # Move forward to look for the next occurrence
 
     return used_indices
 
-def check_horizontal(grid:list[str], words:list[str], used_indices:set, rev:bool) -> set:
-    if not rev:
-        for col, row in enumerate(grid):
-            temp_row = row*2
-            temp_row = ''.join(temp_row)
 
-            for word in words:
-                for i in re.finditer(word, temp_row):
-                    for x in range(i.start(), i.end()):
-                        x = x % len(row)
-                        if tuple((col, x)) not in used_indices:
-                            used_indices.add(tuple((col, x)))
+def check_horizontal(grid: list[list[str]], words: list[str], used_indices: set) -> set:
+    for row_index, row in enumerate(grid):
+        # Create a string for the current row with wrap-around
+        row_str = ''.join(row * 2)
 
-    else:
-        for col, row in enumerate(grid):
-            row = row[::-1]
-            temp_row = row*2
-            temp_row = ''.join(temp_row)
-
-            for word in words:
-                for i in re.finditer(word, temp_row):
-                    for x in range(i.start(), i.end()):
-                        x = x % len(row)
-                        x = len(row) - 1 - x
-                        if tuple((col, x)) not in used_indices:
-                            used_indices.add(tuple((col, x)))
-
+        for word in words:
+            # Search for the word manually
+            start = 0
+            while True:
+                start = row_str.find(word, start)
+                if start == -1:  # No more matches
+                    break
+                # Add all indices corresponding to the found word
+                for y in range(len(word)):
+                    used_indices.add((row_index, (start + y) % len(row)))
+                start += 1  # Move forward to look for the next occurrence
 
     return used_indices
 
