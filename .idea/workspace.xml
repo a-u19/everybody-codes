@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19556a76-617d-46ab-9896-2ab4ac7cc4f0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dummy.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample_2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quest_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/quest_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sample.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,20 +34,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.everybody_codes_quest2_p3_code.executor&quot;: &quot;Run&quot;,
-    &quot;Python.quest_1 (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.quest_1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.quest_1_part_1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.quest_2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.quest_3.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/uarju/OneDrive/Documents/everybody-codes/everybody-codes&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.everybody_codes_quest2_p3_code.executor": "Run",
+    "Python.quest_1 (1).executor": "Run",
+    "Python.quest_1.executor": "Run",
+    "Python.quest_1_part_1.executor": "Run",
+    "Python.quest_2.executor": "Run",
+    "Python.quest_3.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/uarju/OneDrive/Tamil School Kalaivizha",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\uarju\OneDrive\Documents\everybody-codes\everybody-codes" />

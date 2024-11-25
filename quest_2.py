@@ -1,5 +1,6 @@
+import time
+start_time = time.time()
 import re
-from functools import reduce
 
 
 def main_1(inp_str_1: str, words: list[str]) -> int:
@@ -39,15 +40,15 @@ def main_3(inp_str_3: list[str], words: list[str]) -> int:
     words = words + [word[::-1] for word in words]
     grid = convert_to_grid(inp_str_3)
 
-    print("Words to search:", words)
-    print("Grid:")
-    print("\n".join(" ".join(row) for row in grid))
+    # print("Words to search:", words)
+    # print("Grid:")
+    # print("\n".join(" ".join(row) for row in grid))
 
     # Check vertically and horizontally
     used_indices = check_vertical(grid, words, used_indices)
     used_indices = check_horizontal(grid, words, used_indices)
 
-    print("Matched indices:", sorted(used_indices))
+    # print("Matched indices:", sorted(used_indices))
     return len(used_indices)
 
 
@@ -102,3 +103,4 @@ inp_3 = open('everybody_codes_e2024_q02_p3.txt').readlines()
 print(f"The answer to part one is {main_1(inp_1[2], inp_1[0].split(":")[1].strip().split(','))}")
 print(f"The answer to part two is {main_2(inp_2[2:], inp_2[0].split(":")[1].strip().split(','))}")
 print(f"The answer to part three is {main_3(inp_3[2:], inp_3[0].split(":")[1].strip().split(','))}")
+print(f"Time taken is {time.time() - start_time}s")
